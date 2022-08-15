@@ -1,5 +1,5 @@
 import pandas as pd
-
+import os
 import env
 
 titanic_connection=env.get_db_url('titanic_db')
@@ -40,10 +40,9 @@ iris_connection=env.get_db_url('iris_db')
 
 #this is my final function that searches for local csv file and if not there runs queriry, cache it, and brings up the dataframe
 
-
 def get_iris_data():
-     filename = 'iris_db.csv'
-
+    filename = 'iris_db.csv'
+    
     if os.path.isfile(filename):
         return pd.read_csv(filename)
     else:
