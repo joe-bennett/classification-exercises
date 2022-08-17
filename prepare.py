@@ -15,12 +15,15 @@ def prep_iris(iris):
 
 
 def prep_titanic(titanic):
-    titanic = titanic.drop(columns=['embarked','class', 'age','deck'])
+    mean_age= titanic.age.mean()
+    titanic = titanic.drop(columns=['embarked','class','deck'])
     dummy_df = pd.get_dummies(data=titanic[['sex','embark_town']], drop_first=True)
     titanic = pd.concat([titanic, dummy_df], axis=1)
-    titanic=titanic.drop(columns=['embark_town','sex'])
+    titanic= titanic.fillna(mean_age)
+    titanic=titanic.drop(columns=['embark_town'])
     
     return titanic
+
 
 
 def prep_telco(telco):
@@ -59,11 +62,11 @@ def my_train_test_split(df, target):
 
 
 
-X_train = train.drop(columns=['species'])
-y_train = train.species
+# X_train = train.drop(columns=['species'])
+# y_train = train.species
 
-X_validate = validate.drop(columns=['species'])
-y_validate = validate.species
+# X_validate = validate.drop(columns=['species'])
+# y_validate = validate.species
 
-X_test = test.drop(columns=['species'])
-y_test = test.species
+# X_test = test.drop(columns=['species'])
+# y_test = test.species
